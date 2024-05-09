@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="vanDyke">#484041</color>
+    <color name="greenYellow">#B5F44A</color>
+    <color name="cinnabar">#E94F37</color>
+    <color name="aero">#06BEE1</color>
+    <color name="webOrange">#FEA82F</color>
+</resources>
