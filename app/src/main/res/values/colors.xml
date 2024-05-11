@@ -2,8 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="vanDyke">#484041</color>
-    <color name="greenYellow">#B5F44A</color>
+    <color name="grey">#B4B4B4</color>
+    <color name="vanDyke">#2F2C2D</color>
+    <color name="erieBlack">#1D1B1B</color>
+    <color name="greenYellow">#99E11E</color>
+    <color name="greenGrey">#7A67A300</color>
     <color name="cinnabar">#E94F37</color>
     <color name="aero">#06BEE1</color>
     <color name="webOrange">#FEA82F</color>

@@ -24,9 +24,20 @@ class TaskViewModel(app: Application, private val taskRepository: TaskRepository
             taskRepository.updateTask (task)
         }
 
+    fun updateOnTask(taskId: Int, title: String, description: String, date: Long, time: Long) =
+        viewModelScope.launch {
+            taskRepository.updateOnTask(taskId, title, description, date, time)
+        }
+
+    fun updateCompleted(taskId: Int, completed: Boolean) =
+        viewModelScope.launch {
+            taskRepository.updateCompleted(taskId,completed)
+        }
+
+
     fun getAllTasks() = taskRepository.getAllTasks()
 
-    fun searchDatabase(searchQuery: String) = taskRepository.searchDatabase(searchQuery)
+    fun searchTask(query: String?) = taskRepository.searchTask(query)
 
 
 }

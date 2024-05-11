@@ -2,16 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ToDo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/vanDyke</item>
-        <item name="colorPrimaryVariant">@color/vanDyke</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/erieBlack</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/erieBlack</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/greenYellow</item>
         <item name="colorSecondaryVariant">@color/greenYellow</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Background Color -->
+        <item name="android:windowBackground">@color/black</item>
     </style>
 
     <style name="Theme.ToDo" parent="Base.Theme.ToDo" />

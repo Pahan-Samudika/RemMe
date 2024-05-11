@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/addItemFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/addItemFragment"
@@ -19,6 +19,11 @@
         <action
             android:id="@+id/action_editItemFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="task"
+            app:argType="com.example.todo.model.Task"
+            app:nullable="true"
+            />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

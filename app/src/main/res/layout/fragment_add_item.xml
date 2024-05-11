@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".NewNoteFragment"
-        android:padding="12dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/addNoteHeading"
@@ -17,11 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins"
             android:text="Add Task"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="32sp" />
 
         <EditText
             android:id="@+id/addTitle"
@@ -34,20 +33,80 @@
             android:hint="Enter the title"
             android:maxLines="1"
             android:padding="12dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
             android:textSize="20sp" />
 
         <EditText
             android:id="@+id/addDesc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter the description"
-            android:gravity="top"
-            android:padding="12dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins"
-            android:background="@drawable/field_border"
+            android:layout_height="200dp"
             android:layout_below="@id/addTitle"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:background="@drawable/field_border"
+            android:fontFamily="@font/poppins"
+            android:gravity="top"
+            android:hint="Enter the description"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/addDesc"
+            >
+
+            <DatePicker
+                android:id="@+id/editTextDate"
+                android:theme="@style/MyDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="-50dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginRight="-50dp"
+                android:layout_marginBottom="-30dp"
+                />
+
+            <TimePicker
+                android:id="@+id/editTextTime"
+                android:theme="@style/MyDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:timePickerMode="spinner"
+                android:layout_marginLeft="-50dp"
+                android:layout_marginTop="-30dp"
+                android:layout_marginRight="-50dp"
+                android:layout_marginBottom="-30dp"/>
+        </LinearLayout>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/SaveNoteFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:backgroundTint="@color/greenYellow"
+            android:tintMode="@color/white"
+            android:src="@drawable/baseline_done_24"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="editFab" />
 
     </RelativeLayout>
 </layout>

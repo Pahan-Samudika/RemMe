@@ -8,46 +8,147 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="12dp"
+        android:padding="20dp"
         tools:context=".UpdateNoteFragment">
 
-        <TextView
-            android:id="@+id/editNoteHeading"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/LinearVertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins"
-            android:text="Edit Task"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/LinearHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/editNoteHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Task"
+                    android:layout_weight="2"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/TaskCompleted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/greenGrey"
+                    android:text="@string/completed"
+                    android:textSize="10dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/deleteFab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/delete_container"
+                    android:padding="7dp"
+                    android:src="@drawable/baseline_delete_24" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/createdAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/dateTime"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/editNoteDesc">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <EditText
             android:id="@+id/editNoteTitle"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="Enter the title"
-            android:padding="12dp"
-            android:textSize="20sp"
-            android:layout_below="@id/editNoteHeading"
-            android:background="@drawable/field_border"
+            android:layout_below="@id/LinearVertical"
             android:layout_marginTop="16dp"
+            android:background="@drawable/field_border"
+            android:fontFamily="@font/poppins"
+            android:hint="Enter the title"
             android:maxLines="1"
-            android:fontFamily="@font/poppins"/>
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editNoteDesc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter the description"
-            android:gravity="top"
-            android:padding="12dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins"
-            android:background="@drawable/field_border"
+            android:layout_height="150dp"
             android:layout_below="@id/editNoteTitle"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:background="@drawable/field_border"
+            android:fontFamily="@font/poppins"
+            android:gravity="top"
+            android:hint="Enter the description"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/editNoteDesc"
+            >
+
+            <DatePicker
+                android:id="@+id/editTextDate"
+                android:theme="@style/MyDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="-50dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginRight="-50dp"
+                android:layout_marginBottom="-30dp"
+                />
+
+            <TimePicker
+                android:id="@+id/editTextTime"
+                android:theme="@style/MyDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:timePickerMode="spinner"
+                android:layout_marginLeft="-50dp"
+                android:layout_marginTop="-30dp"
+                android:layout_marginRight="-50dp"
+                android:layout_marginBottom="-30dp"/>
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/editNoteFab"
@@ -62,6 +163,21 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:contentDescription="editFab" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cancelFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:backgroundTint="@color/cinnabar"
+            android:tintMode="@color/white"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:contentDescription="editFab" />
+
 
     </RelativeLayout>
 </layout>

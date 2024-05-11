@@ -2,4 +2,13 @@
     <string name="app_name">ToDo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="taskTitle">Task Title</string>
+    <string name="dateTime"><![CDATA[Date & Time]]></string>
+    <string name="createdAt">"Created at : "</string>
+    <string name="channel_name">Task Reminder Channel</string>
+    <string name="channel_description">Channel for task reminders</string>
+    <string name="completed">Mark As Completed</string>
+    <string name="mark_as_incomplete">Mark as Incomplete</string>
+    <string name="mark_as_completed">Mark as Completed</string>
+    <string name="tasks">Tasks</string>
 </resources>

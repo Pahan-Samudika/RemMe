@@ -9,9 +9,13 @@ class TaskRepository(private val db:TaskDatabase) {
 
     suspend fun updateTask(task: Task) = db.getTaskDao().updateTask(task)
 
+    suspend fun updateOnTask(taskId: Int, title: String, description: String, date: Long, time: Long) = db.getTaskDao().updateOnTask(taskId,title,description,date,time)
+
+    suspend fun updateCompleted(taskId: Int, completed: Boolean) = db.getTaskDao().updateCompleted(taskId,completed)
+
     suspend fun deleteTask(task: Task) = db.getTaskDao().deleteTask(task)
 
     fun getAllTasks() = db.getTaskDao().getAllTasks()
 
-    fun searchDatabase(searchQuery: String) = db.getTaskDao().searchDatabase(searchQuery)
+    fun searchTask(query: String?) = db.getTaskDao().searchTask(query)
 }

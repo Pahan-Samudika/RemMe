@@ -6,11 +6,15 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.R
 import com.example.todo.databinding.TaskLayoutBinding
 import com.example.todo.fragments.HomeFragmentDirections
 import com.example.todo.model.Task
+import com.example.todo.viewmodel.TaskViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
+class TaskAdapter (private val taskViewModel: TaskViewModel) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
     class TaskViewHolder (val itemBinding: TaskLayoutBinding): RecyclerView.ViewHolder(itemBinding.root)
 
     private val differCallBack = object : DiffUtil.ItemCallback<Task>(){
@@ -41,14 +45,30 @@ class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val currentTask = differ.currentList[position]
+        val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(currentTask.created)
 
-        holder.itemBinding.TaskTitle.text = currentTask.title
-        holder.itemBinding.TaskDesc.text = currentTask.description
 
+        holder.itemBinding.apply {
+            TaskTitle.text = currentTask.title
+            TaskDesc.text = currentTask.description
+            TaskCompleted.isEnabled = false
+            TaskCompleted.isChecked = currentTask.completed
+            TaskDate.text = formattedDate
 
-        holder.itemView.setOnClickListener{
-            val direction = HomeFragmentDirections.actionHomeFragmentToEditItemFragment()
-            holder.itemView.findNavController().navigate(direction)
+            // Change background color based on completion status
+            if (currentTask.completed) {
+                root.setBackgroundResource(R.drawable.completed_task_background)
+            } else {
+                root.setBackgroundResource(R.drawable.task_background)
+            }
+
+            // Handle item click here
+            root.setOnClickListener {
+                val direction = HomeFragmentDirections.actionHomeFragmentToEditItemFragment(currentTask)
+                it.findNavController().navigate(direction)
+            }
         }
     }
+
 }

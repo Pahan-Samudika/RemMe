@@ -21,6 +21,7 @@ import com.example.todo.databinding.FragmentHomeBinding
 import com.example.todo.model.Task
 import com.example.todo.viewmodel.TaskViewModel
 
+
 class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextListener,MenuProvider {
 
     private var homeBinding: FragmentHomeBinding? = null
@@ -51,22 +52,27 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         binding.addNoteFab.setOnClickListener{
             it.findNavController().navigate(R.id.action_homeFragment_to_addItemFragment)
         }
+
+        val searchView = binding.searchView
+        searchView.isSubmitButtonEnabled = false
+
+        searchView.setOnQueryTextListener(this as SearchView.OnQueryTextListener)
     }
 
-    private fun updateUI(task: List<Task>){
+    private fun updateUI(task: List<Task>?){
         if (task != null){
             if(task.isNotEmpty()){
-                binding.emptyNotesImage.visibility = View.GONE
+                binding.imageView.visibility = View.GONE
                 binding.homeRecyclerView.visibility = View.VISIBLE
             }else{
-                binding.emptyNotesImage.visibility = View.VISIBLE
+                binding.imageView.visibility = View.VISIBLE
                 binding.homeRecyclerView.visibility = View.GONE
             }
         }
     }
 
     private fun setupHomeRecyclerView(){
-        taskAdapter = TaskAdapter()
+        taskAdapter = TaskAdapter(taskViewModel)
         binding.homeRecyclerView.apply{
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(true)
@@ -82,8 +88,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
     }
 
     private fun searchTask(query: String?){
-        val searchQuery = "%$query"
-        taskViewModel.searchDatabase(searchQuery).observe(this) { list ->
+        val searchQuery = "%$query%"
+        taskViewModel.searchTask(searchQuery).observe(this) { list ->
             taskAdapter.differ.submitList(list)
         }
     }
@@ -108,10 +114,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         menu.clear()
         menuInflater.inflate(R.menu.home_menu, menu)
 
-        val menuSearch = menu.findItem(R.id.searchMenu).actionView as SearchView
-        menuSearch.isSubmitButtonEnabled = false
-
-        menuSearch.setOnQueryTextListener(this)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

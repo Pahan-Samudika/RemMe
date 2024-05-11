@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.todo.model.Task
 
-@Database(entities = [Task::class], version = 1)
+@Database(entities = [Task::class], version = 3)
     abstract class TaskDatabase: RoomDatabase() {
         abstract fun getTaskDao(): TaskDao
 
@@ -26,7 +26,7 @@ import com.example.todo.model.Task
                 Room.databaseBuilder(
                     context.applicationContext,
                     TaskDatabase::class.java,
-                    "task_db.db"
-            ).build()
+                    "task_db"
+                ).fallbackToDestructiveMigration().build()
         }
     }
