@@ -10,7 +10,9 @@
         android:label="AddItemFragment" >
         <action
             android:id="@+id/action_addItemFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/editItemFragment"
@@ -18,7 +20,9 @@
         android:label="EditItemFragment" >
         <action
             android:id="@+id/action_editItemFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"/>
         <argument
             android:name="task"
             app:argType="com.example.todo.model.Task"
@@ -31,9 +35,13 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_addItemFragment"
-            app:destination="@id/addItemFragment" />
+            app:destination="@id/addItemFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_homeFragment_to_editItemFragment"
-            app:destination="@id/editItemFragment" />
+            app:destination="@id/editItemFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"/>
     </fragment>
 </navigation>

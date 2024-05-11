@@ -233,7 +233,7 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item), MenuProvider {
             taskViewModel.addTask(task)
 
             Toast.makeText(addTaskView.context, "Task added successfully", Toast.LENGTH_SHORT).show()
-            view.findNavController().popBackStack(R.id.homeFragment, false)
+            view.findNavController().navigate(R.id.action_addItemFragment_to_homeFragment)
         }else{
             Toast.makeText(addTaskView.context, "Please enter a title", Toast.LENGTH_SHORT).show()
         }

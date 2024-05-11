@@ -13,6 +13,10 @@ class TaskRepository(private val db:TaskDatabase) {
 
     suspend fun updateCompleted(taskId: Int, completed: Boolean) = db.getTaskDao().updateCompleted(taskId,completed)
 
+    suspend fun getTaskCount() = db.getTaskDao().getTaskCount()
+
+    suspend fun getCompletedTasks() = db.getTaskDao().getCompletedTasks()
+
     suspend fun deleteTask(task: Task) = db.getTaskDao().deleteTask(task)
 
     fun getAllTasks() = db.getTaskDao().getAllTasks()

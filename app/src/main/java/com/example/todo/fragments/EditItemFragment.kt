@@ -95,7 +95,7 @@ class EditItemFragment : Fragment(R.layout.fragment_edit_item), MenuProvider {
                 if (title.isNotEmpty()){
                     taskViewModel.updateOnTask(currentTask.id, title, description, date, time)
                     Toast.makeText(context, "Task edited successfully", Toast.LENGTH_SHORT).show()
-                    view.findNavController().popBackStack(R.id.homeFragment, false)
+                    view.findNavController().navigate(R.id.action_editItemFragment_to_homeFragment)
                 } else {
                     Toast.makeText(context,"Title cannot be empty", Toast.LENGTH_SHORT).show()
                 }
@@ -139,7 +139,7 @@ class EditItemFragment : Fragment(R.layout.fragment_edit_item), MenuProvider {
 
 
         binding.cancelFab.setOnClickListener {
-            view.findNavController().popBackStack(R.id.homeFragment, false)
+            view.findNavController().navigate(R.id.action_editItemFragment_to_homeFragment)
         }
 
         binding.deleteFab.setOnClickListener {

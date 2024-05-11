@@ -24,6 +24,11 @@ interface TaskDao {
     @Query("UPDATE tasks SET title = :title, description=:description, date=:date, time=:time WHERE id = :taskId")
     suspend fun updateOnTask(taskId: Int, title: String, description: String, date: Long, time: Long)
 
+    @Query("SELECT COUNT(*) from tasks")
+    suspend fun getTaskCount(): Int
+    @Query("SELECT COUNT(*) from tasks WHERE completed = 1")
+    suspend fun getCompletedTasks(): Int
+
     @Delete
     suspend fun deleteTask(task: Task)
 
