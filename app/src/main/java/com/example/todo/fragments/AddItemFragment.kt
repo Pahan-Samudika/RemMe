@@ -182,19 +182,19 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item), MenuProvider {
         val hour = binding.editTextTime.hour
 
         val calendar = Calendar.getInstance()
-        // Set other fields to current values to avoid exceptions
-        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR))
-        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH))
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH))
-        // Set time
         calendar.set(Calendar.HOUR_OF_DAY, hour)
         calendar.set(Calendar.MINUTE, minute)
         calendar.set(Calendar.SECOND, 0)
 
-        return calendar.timeInMillis
+        val selectedTime = calendar.timeInMillis
+        val currentTime = System.currentTimeMillis()
+
+        if (selectedTime < currentTime) {
+            return -1 // Return -1 to indicate invalid time
+        }
+
+        return selectedTime
     }
-
-
 
     private fun getDateOnly(): Long {
         val day = binding.editTextDate.dayOfMonth
@@ -204,9 +204,19 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item), MenuProvider {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
 
-        return calendar.timeInMillis
-    }
+        val selectedDate = calendar.timeInMillis
+        val currentDate = Calendar.getInstance()
+        currentDate.set(Calendar.HOUR_OF_DAY, 0)
+        currentDate.set(Calendar.MINUTE, 0)
+        currentDate.set(Calendar.SECOND, 0)
+        currentDate.set(Calendar.MILLISECOND, 0)
 
+        if (selectedDate < currentDate.timeInMillis) {
+            return -1 // Return -1 to indicate invalid date
+        }
+
+        return selectedDate
+    }
 
     private fun getTime(): Long {
         val minute = binding.editTextTime.minute
@@ -219,7 +229,14 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item), MenuProvider {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day, hour, minute)
 
-        return calendar.timeInMillis
+        val selectedDateTime = calendar.timeInMillis
+        val currentDateTime = System.currentTimeMillis()
+
+        if (selectedDateTime < currentDateTime) {
+            return -1 // Return -1 to indicate invalid date and time
+        }
+
+        return selectedDateTime
     }
 
     private fun saveTask(view: View){
@@ -228,14 +245,21 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item), MenuProvider {
         val date = getDateOnly()
         val time = getTimeOnly()
 
-        if (title.isNotEmpty()){
-            val task = Task(0, title, description, false, System.currentTimeMillis(), date, time)
-            taskViewModel.addTask(task)
+        if (date == -1L || time == -1L) {
+            // Invalid date or time, show an error message and return
+            Toast.makeText(addTaskView.context, "Please enter a valid date and time", Toast.LENGTH_SHORT).show()
+            return
+        } else {
+            if (title.isNotEmpty()){
+                val task = Task(0, title, description, false, System.currentTimeMillis(), date, time)
+                taskViewModel.addTask(task)
 
-            Toast.makeText(addTaskView.context, "Task added successfully", Toast.LENGTH_SHORT).show()
-            view.findNavController().navigate(R.id.action_addItemFragment_to_homeFragment)
-        }else{
-            Toast.makeText(addTaskView.context, "Please enter a title", Toast.LENGTH_SHORT).show()
+                Toast.makeText(addTaskView.context, "Task added successfully", Toast.LENGTH_SHORT).show()
+                view.findNavController().navigate(R.id.action_addItemFragment_to_homeFragment)
+                scheduleNotification()
+            }else{
+                Toast.makeText(addTaskView.context, "Please enter a title", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
